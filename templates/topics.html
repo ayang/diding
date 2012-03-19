@@ -1,0 +1,21 @@
+{% extends "topics-base.html" %}
+
+{% block body %}
+<div class="row">
+	<div class="span8">
+		<div class="box">
+			<div id="topic-flow">
+				{% for topic in topics %}
+				<div class="cell">
+					{% include "snip-topic-summary.html" %}
+				</div>
+				{% end %}
+			</div>
+		</div>
+	</div>
+	<div class="span4">
+		{% include "snip-user-block.html" %}
+		{% module HotTags() %}
+	</div>
+</div>
+{% end %}

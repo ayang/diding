@@ -1,0 +1,71 @@
+{% extends "topics-base.html" %}
+
+{% block body %}
+<div class="row">
+	<div class="span8">
+		<div class="box">
+			<div class="cell">
+				<div class="topic">
+					<div class="pull-right avatar">
+						<a href="{{reverse_url('user', topic['publisher']['uid'])}}">
+							<img src="{{gravatar(topic['publisher']['email'], 96)}}" alt="">
+						</a>
+					</div>
+					<h3>{{ topic["title"] }}</h3>
+					<div>{% raw markup(topic["body"]) %}</div>
+					<span class="topic-tags">
+						{% module Template("snip-tags.html", tags=topic["tags"]) %}
+					</span>
+					<span class="create-info">
+						<a href="{{reverse_url('user', topic['publisher']['uid'])}}">{{topic["publisher"]["name"]}}</a>
+						{{pretty_date(topic["create_time"])}}
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="box">
+			<div class="cell">
+				{% if topic["replies_count"] %}
+				{{topic["replies_count"]}} 回复，直到{{pretty_date(topic["last_reply_time"])}}
+				{% else %}
+				还没有人回复
+				{% end %}
+				<span class="pull-right"><a href="#reply-form">回复</a></span>
+			</div>
+			{% for reply in topic['replies'] %}
+			<div class="cell reply-item">
+				<div class="pull-left avatar">
+					<a href="{{reverse_url('user', reply['user']['uid'])}}">
+						<img src="{{gravatar(reply['user']['email'], 48)}}" alt="">
+					</a>
+				</div>
+				<div>
+					<div>
+						<a href="{{reverse_url('user', reply['user']['uid'])}}">
+							{{reply["user"]["name"]}}
+						</a>
+					</div>
+					<div class="reply-body">
+						{% raw markup(reply["body"]) %}
+					</div>
+				</div>
+			</div>
+			{% end %}
+		</div>
+		<div class="box">
+			<div class="cell">
+				<form action="{{reverse_url('reply', topic['_id'])}}" method="post" id="reply-form">
+					{% raw xsrf_form_html() %}
+					<textarea name="reply" id="id-reply" cols="30" rows="10" class="input-block-level"></textarea>
+					<button type="submit" class="btn">回复</button>
+				</form>
+			</div>
+			<div class="inner">请认真考虑自己的回复能够如何帮助到别人。这里不欢迎无意义的“顶”，“沙发”，“不懂”，“楼主火星了”。</div>
+		</div>
+	</div>
+	<div class="span4">
+		{% include "snip-user-block.html" %}
+	</div>
+</div>
+
+{% end %}

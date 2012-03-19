@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block main-nav %}
+<li><a href="{{reverse_url('topics')}}">话题</a></li>
+<li><a href="{{reverse_url('tags')}}">标签</a></li>
+<li class="active"><a href="{{reverse_url('users')}}">用户</a></li>
+<li><a href="{{reverse_url('newtopic')}}">新话题</a></li>
+{% end %}

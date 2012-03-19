@@ -1,0 +1,21 @@
+<div class="user-info-block box">
+	{% if current_user %}
+	<div class="cell">
+		<div class="pull-right avatar">
+			<a href="{{reverse_url('user', current_user['uid'])}}">
+				<img src="{{gravatar(current_user['email'], 48)}}" alt="">
+			</a>
+		</div>
+		<div style="margin-bottom:1em;"><a href="{{reverse_url('user', current_user['uid'])}}"><strong>{{current_user['name']}}</strong></a></div>
+		<div><a href="#">我关注的标签：0</a></div>
+		<div><a href="#">我收藏的话题：0</a></div>
+	</div>
+	<div class="inner">
+		0条未读消息
+	</div>
+	{% else %}
+	<div class="inner">
+		<a href="{{reverse_url('login')}}?next={{ url_escape(request.uri) }}">Login</a>
+	</div>
+	{% end %}
+</div>

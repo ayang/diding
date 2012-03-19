@@ -1,0 +1,26 @@
+{% extends "topics-base.html" %}
+
+{% block body %}
+<div class="row">
+	<div class="span8">
+		<div class="box">
+			<div class="cell">
+				<div class="tag-info">
+					<h2>标签: {{tag["name"]}}</h2>
+				</div>
+			</div>
+			<div id="topic-flow">
+				{% for topic in topics %}
+				<div class="cell">
+					{% include "snip-topic-summary.html" %}
+				</div>
+				{% end %}
+			</div>
+		</div>
+	</div>
+	<div class="span4">
+		{% include "snip-user-block.html" %}
+		{% module HotTags() %}
+	</div>
+</div>
+{% end %}

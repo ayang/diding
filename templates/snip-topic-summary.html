@@ -1,0 +1,24 @@
+<div class="topic-item">
+	<div class="pull-left avatar">
+		<a href="{{reverse_url('user', topic['publisher']['uid'])}}">
+			<img src="{{gravatar(topic['publisher']['email'], 48)}}" alt="">
+		</a>
+	</div>
+	<div class="pull-right"><span class="badge badge-success">{{topic["replies_count"]}}</span></div>
+	<h5><a href="{{ reverse_url('topic', topic['_id']) }}">{{ topic["title"] }}</a></h5>
+	<div class="tags-and-create">
+		<span class="topic-tags">
+			{% module Template("snip-tags.html", tags=topic["tags"]) %}
+		</span>
+		<span class="create-info">
+			<a href="{{reverse_url('user', topic['publisher']['uid'])}}">{{topic["publisher"]["name"]}}</a>
+			{{pretty_date(topic["create_time"])}}创建
+		</span>
+		<span class="replies-info">
+			{% if topic["last_reply_user"] %}
+			<a href="{{reverse_url('user', topic['last_reply_user']['uid'])}}">{{topic["last_reply_user"]["name"]}}</a>
+			{{pretty_date(topic["last_reply_time"])}}回复
+			{% end %}
+		</span>
+	</div>
+</div>

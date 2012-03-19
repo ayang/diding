@@ -1,0 +1,6 @@
+<ul class="nav nav-tabs">
+	<li{% if active=="topics" %} class="active"{% end %}><a href="{{reverse_url('topics')}}">话题</a></li>
+	<li{% if active=="tags" %} class="active"{% end %}><a href="{{reverse_url('tags')}}">标签</a></li>
+	<li{% if active=="users" %} class="active"{% end %}><a href="{{reverse_url('users')}}">用户</a></li>
+	<li{% if active=="newtopic" %} class="active"{% end %} style="float:right"><a href="{{reverse_url('newtopic')}}">新话题</a></li>
+</ul>

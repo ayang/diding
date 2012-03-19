@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="row">
+	<div class="span12">
+		<h1>编辑话题</h1>
+		<div class="new-topic-block">
+			<form action="/topic/new" method="post" class="new-topic-form">
+				{% raw xsrf_form_html() %}
+				<fieldset>
+					<div class="clearfix">
+						<label for="id-title">标题</label>
+						<div class="input">
+							<input type="text" id="id-title" name="title" class="xxlarge" value="{{topic['title']}}">
+						</div>
+					</div>
+					<div class="clearfix">
+						<label for="id-body">内容</label>
+						<div class="input">
+							<textarea name="body" id="id-body" cols="30" rows="10" class="xxlarge">{{topic['body']}}</textarea>
+						</div>
+					</div>
+					<div class="clearfix">
+						<label for="id-tags">标签</label>
+						<div class="input">
+							<input type="text" id="id-tags" name="tags" class="xxlarge" value="{{' '.join(topic['tags'])}}">
+						</div>
+					</div>
+					<div class="actions">
+						<input type="submit" class="btn primary" value="创建">
+						<button type="reset" class="btn">返回</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<div class="span4 sidebar">
+		<h1>Side Bar</h1>
+		<ul>
+			<li>This is a test sidebar.</li>
+			<li>This is a test sidebar.</li>
+			<li>This is a test sidebar.</li>
+			<li>This is a test sidebar.</li>
+			<li>This is a test sidebar.</li>
+		</ul>
+	</div>
+</div>
+{% end %}
