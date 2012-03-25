@@ -1,0 +1,28 @@
+{% extends "nodes-base.html" %}
+
+{% block main %}
+<div class="box">
+	<div class="cell">
+		<div class="nodes-table row">
+			{% for node in nodes %}
+			<div class="node-item-block span2">
+				<div class="node-name">
+					<a class="node-link" href="{{reverse_url('nodetopics', node['slug'].encode('utf-8'))}}">{{node['name']}}</a>
+				</div>
+				<div class="node-summary">{{node['summary']}}</div>
+			</div>
+			{% end %}
+		</div>
+	</div>
+</div>
+{% end %}
+
+{% block sidebar %}
+{% if current_user and 'createnode' in current_user['access'] %}
+<div class="box">
+	<div class="inner">
+		<center><a class="btn btn-primary" href="{{reverse_url('createnode')}}">创建节点</a></center>
+	</div>
+</div>
+{% end %}
+{% end %}

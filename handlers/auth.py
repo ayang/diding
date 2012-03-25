@@ -17,9 +17,9 @@ class AuthHandler(BaseHandler, tornado.auth.GoogleMixin):
         if not user:
             raise tornado.web.HTTPError(500, "Google auth failed")
         user_manager = UserManager()
-        author = user_manager.get_by_email(user["email"])
-        if not author:
-            author = user_manager.create(user["email"], user["name"])
+        author = user_manager.get_by_google_account(user["email"])
+        if author is None:
+            author = user_manager.create(user["email"], user["name"], {"google": user})
         else:
             user_manager.refresh(author["uid"])
         authorid = str(author["uid"])

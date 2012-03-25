@@ -5,8 +5,8 @@
 	<div class="span8">
 		<div class="box">
 			<div class="cell">
-				<div class="tag-info">
-					<h2>标签: {{tag["name"]}}</h2>
+				<div class="node-info">
+					<h2>节点: {{node["name"]}}</h2>
 				</div>
 			</div>
 			<div id="topic-flow">
@@ -20,7 +20,7 @@
 	</div>
 	<div class="span4">
 		{% include "snip-user-block.html" %}
-		{% module HotTags() %}
+		{% module HotNodes() %}
 	</div>
 </div>
 {% end %}

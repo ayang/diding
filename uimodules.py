@@ -1,8 +1,8 @@
 import tornado.web
-from models.message import TagManager
+from models.topic import NodeManager
 
 
-class HotTags(tornado.web.UIModule):
+class HotNodes(tornado.web.UIModule):
     def render(self, count=20):
-        tags = TagManager().all(limit=count)
-        return self.render_string("module-hottags.html", tags=tags)
+        nodes = NodeManager().all(limit=count)
+        return self.render_string("module-hotnodes.html", nodes=nodes)

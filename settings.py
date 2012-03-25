@@ -46,6 +46,7 @@ settings['cookie_secret'] = "your-cookie-secret"
 settings['xsrf_cookies'] = True
 settings['template_loader'] = tornado.template.Loader(TEMPLATE_ROOT)
 settings['ui_modules'] = uimodules
+settings['login_url'] = '/login'
 
 
 SYSLOG_TAG = "boilerplate"

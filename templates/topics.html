@@ -15,7 +15,12 @@
 	</div>
 	<div class="span4">
 		{% include "snip-user-block.html" %}
-		{% module HotTags() %}
+		{% module HotNodes() %}
 	</div>
 </div>
+{% end %}
+
+{% block breadcrumb %}
+<li><a href="{{reverse_url('home')}}">首页</a><span class="divider">/</span></li>
+<li class="active"><a href="{{reverse_url('topics')}}">所有话题</a></li>
 {% end %}

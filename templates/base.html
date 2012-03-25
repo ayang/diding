@@ -7,9 +7,14 @@
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="{{ static_url("css/bootstrap.min.css") }}" type="text/css">
-    {# <link rel="stylesheet" href="{{ static_url("css/bootstrap-responsive.min.css") }}" type="text/css"> #}
+    <link rel="stylesheet" href="{{ static_url("bootstrap/css/bootstrap.min.css") }}" type="text/css">
+    {# <link rel="stylesheet" href="{{ static_url("bootstrap/css/bootstrap-responsive.min.css") }}" type="text/css"> #}
     <link rel="stylesheet" href="{{ static_url("css/site.css") }}" type="text/css">
+    {# <link rel="stylesheet" href="{{ static_url("css/wmd.css") }}" type="text/css"> #}
+    {% block extra_head_base %}
+        {% block extra_head %}
+        {% end %}
+    {% end %}
 </head>
 <body>
 
@@ -21,7 +26,7 @@
                     <ul class="nav">
                         {% block main-nav %}
                         <li><a href="{{reverse_url('topics')}}">话题</a></li>
-                        <li><a href="{{reverse_url('tags')}}">标签</a></li>
+                        <li><a href="{{reverse_url('nodes')}}">节点</a></li>
                         <li><a href="{{reverse_url('users')}}">用户</a></li>
                         <li><a href="{{reverse_url('newtopic')}}">新话题</a></li>
                         {% end %}
@@ -42,6 +47,17 @@
         </div>
     </div>
 
+    {# {% block breadcrumb_outer %}
+    <div class="breadcrumb-bar">
+        <div class="container">
+            <ul class="breadcrumb box">
+                <li><a href="{{reverse_url('home')}}">首页</a><span class="divider">/</span></li>
+                {% block breadcrumb %}{% end %}
+            </ul>
+        </div>
+    </div>
+    {% end %} #}
+
     <div class="body">
         <div class="body-inner">
             <div class="container">
@@ -57,7 +73,13 @@
     </div>
 
     <script type="text/javascript" src="{{ static_url("js/jquery-1.7.1.min.js")}}"></script>
-    <script type="text/javascript" src="{{ static_url("js/bootstrap.min.js")}}"></script>
+    <script type="text/javascript" src="{{ static_url("bootstrap/js/bootstrap.min.js")}}"></script>
+    {# // <script type="text/javascript" src="{{ static_url("js/showdown.js")}}"></script> #}
+    {# // <script type="text/javascript" src="{{ static_url("js/wmd.js")}}"></script> #}
+    {% block extra_body_base %}
+        {% block extra_body %}
+        {% end %}
+    {% end %}
 
 </body>
 </html>

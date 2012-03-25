@@ -13,9 +13,7 @@
 					</div>
 					<h3>{{ topic["title"] }}</h3>
 					<div>{% raw markup(topic["body"]) %}</div>
-					<span class="topic-tags">
-						{% module Template("snip-tags.html", tags=topic["tags"]) %}
-					</span>
+					<span class="node-link"><a href="{{reverse_url('nodetopics', topic['node']['slug'])}}">{{topic['node']['name']}}</a></span>
 					<span class="create-info">
 						<a href="{{reverse_url('user', topic['publisher']['uid'])}}">{{topic["publisher"]["name"]}}</a>
 						{{pretty_date(topic["create_time"])}}
@@ -30,7 +28,7 @@
 				{% else %}
 				还没有人回复
 				{% end %}
-				<span class="pull-right"><a href="#reply-form">回复</a></span>
+				{% if current_user %}<span class="pull-right"><a href="#reply-form">回复</a></span>{% end %}
 			</div>
 			{% for reply in topic['replies'] %}
 			<div class="cell reply-item">
@@ -52,20 +50,32 @@
 			</div>
 			{% end %}
 		</div>
+		{% if current_user %}
 		<div class="box">
 			<div class="cell">
 				<form action="{{reverse_url('reply', topic['_id'])}}" method="post" id="reply-form">
 					{% raw xsrf_form_html() %}
 					<textarea name="reply" id="id-reply" cols="30" rows="10" class="input-block-level"></textarea>
-					<button type="submit" class="btn">回复</button>
+					<button type="submit" class="btn">回复(Ctrl+Enter)</button>
 				</form>
 			</div>
 			<div class="inner">请认真考虑自己的回复能够如何帮助到别人。这里不欢迎无意义的“顶”，“沙发”，“不懂”，“楼主火星了”。</div>
 		</div>
+		{% end %}
 	</div>
 	<div class="span4">
 		{% include "snip-user-block.html" %}
 	</div>
 </div>
 
+{% end %}
+
+{% block extra_body %}
+<script>
+$("form").keydown(function(e) {
+    if (e.ctrlKey && e.which ==13){
+        $("form").submit();
+    }
+});
+</script>
 {% end %}

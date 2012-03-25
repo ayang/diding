@@ -7,9 +7,7 @@
 	<div class="pull-right"><span class="badge badge-success">{{topic["replies_count"]}}</span></div>
 	<h5><a href="{{ reverse_url('topic', topic['_id']) }}">{{ topic["title"] }}</a></h5>
 	<div class="tags-and-create">
-		<span class="topic-tags">
-			{% module Template("snip-tags.html", tags=topic["tags"]) %}
-		</span>
+		<span class="node-link"><a href="{{reverse_url('nodetopics', topic['node']['slug'])}}">{{topic['node']['name']}}</a></span>
 		<span class="create-info">
 			<a href="{{reverse_url('user', topic['publisher']['uid'])}}">{{topic["publisher"]["name"]}}</a>
 			{{pretty_date(topic["create_time"])}}创建
