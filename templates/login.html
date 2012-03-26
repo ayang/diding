@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="box">
+	<div class="inner login">
+		<div class="page-header">
+			<h1>用户登录</h1>		
+		</div>
+		<div class="cell openid-login">
+			<a href="{{reverse_url('login_google')}}">使用Google账户登录</a>
+			<a href="{{reverse_url('login_douban')}}">使用豆瓣账户登录</a>
+		</div>
+		<div class="inner">
+			<form action="" class="login-form form-horizontal">
+				{% raw xsrf_form_html() %}
+				<fieldset>
+					<div class="control-group">
+						<label for="id-username" class="control-label">用户名</label>
+						<div class="controls"><input type="text" id="id-username" name="username"></div>
+					</div>
+					<div class="control-group">
+						<label for="id-password" class="control-label">密码</label>
+						<div class="controls"><input type="password" id="id-password" name="password"></div>
+					</div>
+					<div class="form-actions">
+						<input type="submit" value="登录" class="btn btn-primary">
+						<span style="margin-left:2em;">如果还不是本站用户，请在此处<a href="{{reverse_url('signup')}}">注册</a></span>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% end %}
