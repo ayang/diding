@@ -10,34 +10,10 @@
 			<form action="" class="form-horizontal" id="signup-form" method="post">
 				{% raw xsrf_form_html() %}
 				<fieldset>
-					<div class="control-group">
-						<label for="id-email" class="control-label">电子邮件</label>
-						<div class="controls">
-							<input type="text" id="id-email" name="email">
-							<span class="help-inline">请输入常用电子邮件，以便找回密码</span>
-						</div>
-					</div>
-					<div class="control-group">
-						<label for="id-password" class="control-label">密码</label>
-						<div class="controls">
-							<input type="password" id="id-password" name="password">
-							<span class="help-inline">密码长一点才是王道，话说8位以下都Out了</span>
-						</div>
-					</div>
-					<div class="control-group">
-						<label for="id-password2" class="control-label">密码(重复)</label>
-						<div class="controls">
-							<input type="password" id="id-password2" name="password2">
-							<span class="help-inline">麻烦您再输一遍</span>
-						</div>
-					</div>
-					<div class="control-group">
-						<label for="id-name" class="control-label">昵称</label>
-						<div class="controls">
-							<input type="text" id="id-name" name="name">
-							<span class="help-inline">选一个合适的昵称，可以使用您的名字</span>
-						</div>
-					</div>
+					{% module Template('form/input-text.html', field=form["name"]) %}
+					{% module Template('form/input-text.html', field=form["email"]) %}
+					{% module Template('form/input-text.html', field=form["password"]) %}
+					{% module Template('form/input-text.html', field=form["password2"]) %}
 					<div class="form-actions">
 						<input type="submit" value="注册" class="btn btn-primary">
 						<span style="margin-left:2em;">已经本站用户，或者您是Google用户，请在此处<a href="{{reverse_url('login')}}">登录</a></span>

@@ -3,10 +3,10 @@
 	<div class="controls">
 		<input type="text" id="id-{{field.name}}" name="{{field.name}}" value="{{field.value}}" placeholder="{{field.placeholder}}">
 		{% if field.help %}
-		{% if inline_help %}
-		<span class="help-inline">{{field.help}}</span>
-		{% else %}
+		{% if "block_help" in locals() and block_help %}
 		<p class="help-block">{{field.help}}</p>
+		{% else %}
+		<span class="help-inline">{{field.help}}</span>
 		{% end %}
 		{% end %}
 	</div>
