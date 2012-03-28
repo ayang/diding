@@ -1,0 +1,13 @@
+<div class="control-group{% if field.error %} error{% end %}">
+	<label for="id-{{field.name}}" class="control-label">{{field.label}}</label>
+	<div class="controls">
+		<input type="text" id="id-{{field.name}}" name="{{field.name}}" value="{{field.value}}" placeholder="{{field.placeholder}}">
+		{% if field.help %}
+		{% if inline_help %}
+		<span class="help-inline">{{field.help}}</span>
+		{% else %}
+		<p class="help-block">{{field.help}}</p>
+		{% end %}
+		{% end %}
+	</div>
+</div>

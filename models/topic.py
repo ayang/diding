@@ -37,6 +37,9 @@ class UserManager(DataManager):
         user = self.db.user.find_one({"email": email})
         return user
 
+    def get_by_local_account(self, email):
+        return self.db.user.find_one({"accounts.local.email": email})
+
     def get_by_google_account(self, email):
         return self.db.user.find_one({"accounts.google.email": email})
 

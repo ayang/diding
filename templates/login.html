@@ -11,12 +11,12 @@
 			<a href="{{reverse_url('login_douban')}}">使用豆瓣账户登录</a>
 		</div>
 		<div class="inner">
-			<form action="" class="login-form form-horizontal">
+			<form action="" class="form-horizontal" id="login-form" method="post">
 				{% raw xsrf_form_html() %}
 				<fieldset>
 					<div class="control-group">
-						<label for="id-username" class="control-label">用户名</label>
-						<div class="controls"><input type="text" id="id-username" name="username"></div>
+						<label for="id-email" class="control-label">Email</label>
+						<div class="controls"><input type="text" id="id-email" name="email"></div>
 					</div>
 					<div class="control-group">
 						<label for="id-password" class="control-label">密码</label>
