@@ -12,6 +12,9 @@ class BaseHandler(tornado.web.RequestHandler):
     subclass this one.
     """
 
+    def initialize(self):
+        self.alerts = []
+
     def load_json(self):
         """Load JSON from the request body and store them in
         self.request.arguments, like Tornado does by default for POSTed form
@@ -114,6 +117,10 @@ class BaseHandler(tornado.web.RequestHandler):
             markup=self.markup,
             pretty_date=self.pretty_date,
             gravatar=self.gravatar,
+            alerts=self.alerts
         )
         args.update(kwargs)
         return super(BaseHandler, self).render_string(template_name, **args)
+
+    def alert(self, type, message):
+        self.alerts.append({"type": type, "message": message})

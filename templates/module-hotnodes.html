@@ -4,7 +4,7 @@
 	</div>
 	<div class="inner">
 		{% for node in nodes %}
-		<span class="node-link"><a href="{{reverse_url('nodetopics', node['slug'])}}">{{node['name']}}</a></span>
+		<span class="node"><a class="node-link" href="{{reverse_url('nodetopics', node['slug'])}}">{{node['name']}}</a></span>
 		{% end %}
 	</div>
 </div>

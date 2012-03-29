@@ -4,9 +4,18 @@
 <div class="box">
 	<div class="inner signup">
 		<div class="page-header">
-			<h1>用户注册</h1>		
+			<h1>用户注册</h1>
 		</div>
 		<div class="inner">
+			{% if "errors" in globals() and errors %}
+			<div class="alert alert-error">
+				<ul id="" class="">
+					{% for e in errors %}
+					<li>{{e}}</li>
+					{% end %}
+				</ul>
+			</div>
+			{% end %}
 			<form action="" class="form-horizontal" id="signup-form" method="post">
 				{% raw xsrf_form_html() %}
 				<fieldset>
@@ -16,12 +25,14 @@
 					{% module Template('form/input-text.html', field=form["password2"]) %}
 					<div class="form-actions">
 						<input type="submit" value="注册" class="btn btn-primary">
-						<span style="margin-left:2em;">已经本站用户，或者您是Google用户，请在此处<a href="{{reverse_url('login')}}">登录</a></span>
+						<span style="margin-left:2em;">
+							已经本站用户，或者您是Google用户，请在此处
+							<a href="{{reverse_url('login')}}">登录</a>
+						</span>
 					</div>
 				</fieldset>
 			</form>
 		</div>
 	</div>
 </div>
-
 {% end %}

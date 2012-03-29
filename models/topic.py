@@ -71,6 +71,26 @@ class UserManager(DataManager):
     def set_profile(self, uid, profile):
         return self.db.user.update({"uid": uid}, {"$set": {"profile": profile}})
 
+    def hash_password(self, password):
+        try:
+            import bcrypt
+            hashed = bcrypt.hashpw(password, bcrypt.gensalt(14))
+            return hashed
+        except ImportError:
+            return password
+
+    def authenticate(self, user, password):
+        account = user["accounts"]["local"]
+        try:
+            import bcrypt
+            hashed = bcrypt.hashpw(password, account["password"])
+            if hashed == account["password"]:
+                return True
+        except ImportError:
+            if password == account["password"]:
+                return True
+        return False
+
 
 @singleton
 class NodeManager(DataManager):
