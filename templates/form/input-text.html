@@ -1,7 +1,8 @@
 <div class="control-group{% if field.error %} error{% end %}">
 	<label for="id-{{field.name}}" class="control-label">{{field.label}}</label>
 	<div class="controls">
-		<input type="{{field.type}}" id="id-{{field.name}}" name="{{field.name}}" value="{{field.value}}" placeholder="{{field.placeholder}}">
+		<input type="{{field.type}}" id="id-{{field.name}}" name="{{field.name}}" value="{{field.value}}" placeholder="{{field.placeholder}}" 
+		{% for name, value in field.attribs.items() %}{{name}}="{{value}}" {% end %}>
 		{% if field.help %}
 		{% if "block_help" in locals() and block_help %}
 		<p class="help-block">{{field.help}}</p>
