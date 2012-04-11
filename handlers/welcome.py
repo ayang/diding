@@ -35,7 +35,7 @@ class NodeTopicsHandler(BaseHandler):
 
 class TopicHandler(BaseHandler):
     def get(self, tid):
-        topic = TopicManager().get_by_tid(tid)
+        topic = TopicManager().get_by_tid(int(tid))
         if topic is None:
             raise tornado.web.HTTPError(404)
         self.render("topic.html", topic=topic)
@@ -62,7 +62,7 @@ class NewTopicHandler(BaseHandler):
 
 class UpdateTopicHandler(BaseHandler):
     def get(self, tid):
-        topic = TopicManager().get(id)
+        topic = TopicManager().get_by_tid(int(tid))
         if topic is None:
             raise tornado.web.HTTPError(404)
         self.render("updatetopic.html", topic=topic)
@@ -72,7 +72,7 @@ class UpdateTopicHandler(BaseHandler):
         body = self.get_argument("body")
         nodes = self.get_argument("nodes")
         node_list = nodes.split()
-        topic = TopicManager().update(tid, title, body, node_list)
+        topic = TopicManager().update(int(tid), title, body, node_list)
         if topic is None:
             raise tornado.web.HTTPError(404)
         self.redirect("/topic/%s" % topic["tid"])
@@ -82,8 +82,8 @@ class ReplyHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self, tid):
         body = self.get_argument("reply")
-        TopicManager().reply(tid, self.current_user, body)
-        self.redirect(self.reverse_url("topic", tid))
+        TopicManager().reply(int(tid), self.current_user, body)
+        self.redirect(self.reverse_url("topic", int(tid)))
 
 
 class NodeHandler(BaseHandler):
