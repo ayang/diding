@@ -162,7 +162,7 @@ class TopicManager(DataManager):
     def create(self, publisher, title, body, node, **kwargs):
         tid = self.db.counter.find_and_modify({"name": "topic_id"}, {"$inc": {"c": 1}}, upsert=True)
         topic = {
-            "tid": tid,
+            "tid": tid["c"],
             "node": extract(node, ("name", "slug")),
             "publisher": publisher,
             "title": title,
