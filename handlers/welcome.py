@@ -111,7 +111,7 @@ class CreateNodeHandler(BaseHandler):
         name = self.get_argument("name")
         slug = self.get_argument("slug")
         summary = self.get_argument("summary")
-        icon = self.get_argument("icon")
+        icon = self.get_argument("icon", None)
         section = self.get_argument("section")
         user = self.current_user
         NodeManager().create(name, slug, user["uid"], icon=icon, summary=summary, section=section)
