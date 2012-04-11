@@ -5,7 +5,7 @@
 		</a>
 	</div>
 	<div class="pull-right"><span class="badge badge-success">{{topic["replies_count"]}}</span></div>
-	<h5><a href="{{ reverse_url('topic', topic['_id']) }}">{{ topic["title"] }}</a></h5>
+	<h5><a href="{{ reverse_url('topic', topic['tid']) }}">{{ topic["title"] }}</a></h5>
 	<div class="topic-create-info">
 		<span class="node"><a class="node-link" href="{{reverse_url('nodetopics', topic['node']['slug'])}}">{{topic['node']['name']}}</a></span>
 		<span class="create-info">

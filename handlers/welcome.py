@@ -34,8 +34,8 @@ class NodeTopicsHandler(BaseHandler):
 
 
 class TopicHandler(BaseHandler):
-    def get(self, id):
-        topic = TopicManager().get(id)
+    def get(self, tid):
+        topic = TopicManager().get_by_tid(tid)
         if topic is None:
             raise tornado.web.HTTPError(404)
         self.render("topic.html", topic=topic)
@@ -57,33 +57,33 @@ class NewTopicHandler(BaseHandler):
         if node is None:
             raise tornado.web.HTTPError(404)
         topic = TopicManager().create(self.current_user, title, body, node)
-        self.redirect("/topic/%s" % topic["_id"])
+        self.redirect("/topic/%s" % topic["tid"])
 
 
 class UpdateTopicHandler(BaseHandler):
-    def get(self, id):
+    def get(self, tid):
         topic = TopicManager().get(id)
         if topic is None:
             raise tornado.web.HTTPError(404)
         self.render("updatetopic.html", topic=topic)
 
-    def post(self, id):
+    def post(self, tid):
         title = self.get_argument("title")
         body = self.get_argument("body")
         nodes = self.get_argument("nodes")
         node_list = nodes.split()
-        topic = TopicManager().update(id, title, body, node_list)
+        topic = TopicManager().update(tid, title, body, node_list)
         if topic is None:
             raise tornado.web.HTTPError(404)
-        self.redirect("/topic/%s" % topic["_id"])
+        self.redirect("/topic/%s" % topic["tid"])
 
 
 class ReplyHandler(BaseHandler):
     @tornado.web.authenticated
-    def post(self, id):
+    def post(self, tid):
         body = self.get_argument("reply")
-        TopicManager().reply(id, self.current_user, body)
-        self.redirect(self.reverse_url("topic", id))
+        TopicManager().reply(tid, self.current_user, body)
+        self.redirect(self.reverse_url("topic", tid))
 
 
 class NodeHandler(BaseHandler):
@@ -112,7 +112,7 @@ class CreateNodeHandler(BaseHandler):
         slug = self.get_argument("slug")
         summary = self.get_argument("summary")
         icon = self.get_argument("icon", None)
-        section = self.get_argument("section")
+        section = self.get_argument("section", "Default")
         user = self.current_user
         NodeManager().create(name, slug, user["uid"], icon=icon, summary=summary, section=section)
         self.redirect(self.reverse_url("nodetopics", slug))

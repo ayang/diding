@@ -179,8 +179,8 @@ class TopicManager(DataManager):
 
         return topic
 
-    def update(self, id, title, body, **kwargs):
-        topic = self.get(id)
+    def update(self, tid, title, body, **kwargs):
+        topic = self.get_by_tid(tid)
         topic["title"] = title
         topic["body"] = body
         topic["update_time"] = datetime.utcnow()
